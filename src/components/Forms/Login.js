@@ -1,3 +1,4 @@
+import { computeHeadingLevel } from '@testing-library/react';
 import React, {Component} from 'react';
 import fire from '../../config/Fire';
 import './Login.css';
@@ -11,8 +12,12 @@ class Login extends Component {
 
     login = e => {
         e.preventDefault();
-        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((userCredentials) => {
+            const { user } = userCredentials;
+            console.log(user)
+        })
         .catch((error) => {
+            console.log(error)
             this.setState({fireErrors: error.message})
         });
     }
