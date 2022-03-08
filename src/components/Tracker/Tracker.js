@@ -15,7 +15,6 @@ class Tracker extends Component {
         currentUID: fire.auth().currentUser.uid
     }
 
-    // logout function
     logout = () => {
         fire.auth().signOut();
     }
@@ -26,11 +25,9 @@ class Tracker extends Component {
         });
     }
 
-    // add transaction
     addNewTransaction = () => {
         const {transactionName, transactionType, price, currentUID, money} = this.state;
 
-        // validation
         if(transactionName && transactionType && price){
 
             const BackUpState = this.state.transactions;
@@ -49,7 +46,6 @@ class Tracker extends Component {
                 price: price,
                 user_id: currentUID
             }).then((data) => {
-                //success callback
                 console.log('success callback');
                 this.setState({
                     transactions: BackUpState,
@@ -59,7 +55,6 @@ class Tracker extends Component {
                     price: ''
                 })
             }).catch((error)=>{
-                //error callback
                 console.log('error ' , error)
             });
 
@@ -72,7 +67,6 @@ class Tracker extends Component {
         const BackUpState = this.state.transactions;
         fire.database().ref('Transactions/' + currentUID).once('value',
         (snapshot) => {
-            // console.log(snapshot);
             snapshot.forEach((childSnapshot) => {
 
                 totalMoney = 
@@ -87,7 +81,6 @@ class Tracker extends Component {
                     price: childSnapshot.val().price,
                     user_id: childSnapshot.val().user_id
                 });
-                // console.log(childSnapshot.val().name);
             });
             this.setState({
                 transactions: BackUpState,
