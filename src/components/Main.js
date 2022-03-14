@@ -15,7 +15,6 @@ export default class Main extends Component {
     componentDidMount(){
       this.authListener();
     }
-
     authListener(){
       fire.auth().onAuthStateChanged((user) => {
         if(user){
@@ -25,11 +24,9 @@ export default class Main extends Component {
         }
       });
     }
-
     formSwitcher = (action) => {
         this.setState({formSwitcher: action === 'register' ? true : false});
     }
-
     render() {
         const form = !this.state.formSwitcher ? <Login /> : <Register />;
 
@@ -41,7 +38,6 @@ export default class Main extends Component {
                 </div>
               </div>);
         }
-
         return (
             <>
                 {!this.state.user ? (
