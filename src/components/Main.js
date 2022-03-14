@@ -5,13 +5,11 @@ import Login from './Forms/Login';
 import Register from './Forms/Register';
 import Spinner from '../assets/loader.gif';
 import Tracker from './Tracker/Tracker';
-
 export default class Main extends Component {
     state = {
         user: 1,
         loading: true
     }
-
     componentDidMount(){
       this.authListener();
     }
